@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * Implements hook_permission.
+ */
+function zomato_permission() {
+	return array(
+		'administer zomato' => array(
+			'title' => t('Administer Zomato API Configuration'),
+		),
+	);
+}
+
+/**
+ * Implements hook_menu.
+ */
+function zomato_menu() {
+	$menu = array();
+
+	$menu['admin/config/services/zomato'] = array(
+		'title' => t('Zomato API Configuration'),
+		'description' => t('Set Zomato API configurations here.'),
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('zomato_config_form'),
+		'access arguments' => array('administer zomato'),
+		'file' => 'zomato.admin.inc',
+		'type' => MENU_NORMAL_ITEM,
+	);
+
+	return $menu;
+}
+
+function zomato_request($call, $params = array(), $http_request_options = array()) {
+	$zomato_obj = new ZomatoApi();
+
+	$options['params'] = $params;
+	$options['http_request_options'] = $http_request_options;
+	$response = $zomato_obj->request($call, $options);
+
+	return $response;
+}
+

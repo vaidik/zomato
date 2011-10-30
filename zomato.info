@@ -1,0 +1,5 @@
+name = Zomato
+description = "Integrates with the Zomato Public API."
+core = 7.x
+files[] = zomato.module
+files[] = zomato.request.inc
