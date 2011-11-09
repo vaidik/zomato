@@ -18,8 +18,8 @@ function zomato_menu() {
   $menu = array();
 
   $menu['admin/config/services/zomato'] = array(
-    'title' => t('Zomato API Configuration'),
-    'description' => t('Set Zomato API configurations here.'),
+    'title' => 'Zomato API Configuration',
+    'description' => 'Set Zomato API configurations here.',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('zomato_config_form'),
     'access arguments' => array('administer zomato'),
