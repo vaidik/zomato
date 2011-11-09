@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Everything related to Zomato's Admin.
+ */
+
+/**
  * Implements hook_form.
  */
 function zomato_config_form() {

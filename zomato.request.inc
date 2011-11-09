@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * API for making call to Zomato API.
+ */
+
+/**
  * Request object for Zomato API.
  */
 class ZomatoApi {
