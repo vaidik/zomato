@@ -39,7 +39,7 @@ class ZomatoApi {
 
     $options['http_request_options']['headers']['X-Zomato-API-Key'] = $this->key;
 
-    $response = drupal_http_request($this->base_url . $call . '?' . query, $options['http_request_options']);
+    $response = drupal_http_request($this->base_url . $call . '?' . $query, $options['http_request_options']);
 
     return $response;
   }
