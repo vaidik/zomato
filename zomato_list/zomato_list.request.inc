@@ -72,10 +72,43 @@ class ZomatoList {
   function getList($listIdentifier) {
     $lists = array();
 
-    $url = $this->baseURL . 'lists/' . $this->listIdentifier;
+    $url = $this->baseURL . 'lists/' . $listIdentifier;
     $response = drupal_http_request($url);
 
-    $response['parsed'] = $lists;
+    if (!isset($response->redirect_url)) {
+
+      $doc = new DOMDocument();
+      @$doc->loadHTML($response->data);
+
+      $elements = $this->getElementByClassName($doc,
+                                               'search-result list-margin',
+                                               'div');
+      foreach ($elements as $element) {
+        $list = array();
+
+        $childNodes = $element->childNodes;
+        $header = $childNodes->item(2);
+
+        $title = $header->childNodes->item(1)->childNodes->item(2);
+        $list['title'] = $title->nodeValue;
+        $list['link'] = $title->childNodes->item(0)->getAttribute('href');
+
+        $list['address'] = $header->childNodes->item(3)
+                                  ->childNodes->item(3)
+                                  ->childNodes->item(3)
+                                  ->nodeValue;
+        $list['cuisine'] = explode(': ', $childNodes->item(4)
+                                                    ->childNodes->item(7)
+                                                    ->childNodes->item(2)
+                                                    ->nodeValue);
+        $list['cuisine'] = $list['cuisine'][1];
+
+        $lists[] = $list;
+        unset($list);
+      }
+    }
+
+    $response->parsed = $lists;
     return $response;
   }
 
