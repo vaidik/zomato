@@ -10,30 +10,19 @@
  * created by a particular user on Zomato.com.
  */
 class ZomatoList {
-  private $userIdentifier;
   private $baseURL;
 
-  function __construct($userIdentifier) {
-    $this->setUserIdentifier($userIdentifier);
+  function __construct() {
     $this->baseURL = 'http://www.zomato.com/';
-  }
-
-  /**
-   * Validates and sets user identifier.
-   */
-  function setUserIdentifier($userIdentifier) {
-    if (!empty($userIdentifier)) {
-      $this->userIdentifier = $userIdentifier;
-    }
   }
 
   /**
    * Gets list of lists created by the user.
    */
-  function getLists() {
+  function getLists($userIdentifier) {
     $lists = array();
 
-    $url = $this->baseURL . 'users/' . $this->userIdentifier . '/lists';
+    $url = $this->baseURL . 'users/' . $userIdentifier . '/lists';
     $response = drupal_http_request($url);
 
     if (!isset($response->redirect_url)) {
