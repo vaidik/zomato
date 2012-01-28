@@ -1,0 +1,5 @@
+name = Zomato List
+description = "Scrapes data from public Zomato lists."
+core = 7.x
+files[] = zomato_list.module
+files[] = zomato_list.request.inc
