@@ -108,14 +108,20 @@ class ZomatoList {
       }
     }
 
-    $response->parsed = $lists;
+    $response->parsed = array(
+      'name' => trim($doc->getElementById('list-title')->nodeValue),
+      'description' => trim($doc->getElementById('list-description')->nodeValue),
+      'slug' => $listIdentifier,
+      'link' => $url,
+      'list' => $lists,
+    );
     return $response;
   }
 
   /**
    * Custom function to get elements by class name.
    */
-  private function getElementByClassName($doc, $classes, $tag) {
+  private function getElementByClassName($doc, $classes, $tag = '*') {
     $classes = explode(' ', $classes);
     $matched = array();
 
