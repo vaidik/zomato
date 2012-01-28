@@ -51,6 +51,8 @@ class ZomatoList {
         $list['name'] = $childNodes->item(0)->nodeValue;
         $list['link'] = $childNodes->item(0)->childNodes
                                             ->item(0)->getAttribute('href');
+        $list['slug'] = explode('/', $list['link']);
+        $list['slug'] = $list['slug'][count($list['slug'])-1];
         preg_match('/[0-9]+/', $childNodes->item(1)->nodeValue, $matches);
         $list['count'] = (int) $matches[0];
         $list['description'] = $childNodes->item(2)->nodeValue;
