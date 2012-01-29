@@ -1,5 +1,13 @@
 name = Zomato List
 description = "Scrapes data from public Zomato lists."
+package = Views
+dependencies[] = views
 core = 7.x
-files[] = zomato_list.module
+
 files[] = zomato_list.request.inc
+files[] = zomato_list_plugin_query_xml.inc
+files[] = zomato_list.views.inc
+files[] = handlers/zomato_list_handler_field_restaurant_name.inc
+files[] = handlers/zomato_list_handler_field_restaurant_link.inc
+files[] = handlers/zomato_list_handler_field_restaurant_address.inc
+files[] = handlers/zomato_list_handler_field_restaurant_cuisine.inc
